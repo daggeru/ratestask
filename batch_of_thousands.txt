@@ -1,0 +1,12 @@
+I'd like to base my example on AWS.
+
+I'd like to propose sending data or batches to s3 directly from front-end. Then I'd like to use SQS that notifies SNS which notifies AWS Lambda.
+We could skip SQS, but using it will ensure, that no messages are lost. We could then send notification to Lambda that divides batches for smaller bites of data.
+If batches are small enough we could skip that initial Lambda and send notification to Lambdas, that process data and put it into database.
+
+Factors we need to take into consideration:
+User experience, time needed to load file and how long user needs to stay on site after uploading file.
+Will Lambda process batches in 45-60 minutes, before it terminates itself.
+Lambda's cooldowns.
+Idempotent operations on database.
+It might by exaggeration, but S3 file size limit, in case we will provide files bigger than 5 terabytes :)

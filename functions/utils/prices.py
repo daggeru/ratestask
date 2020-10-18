@@ -30,13 +30,12 @@ def price_parser(price_to_parse: str) -> tuple:
 
 
 def get_prices(dest_codes: list, origin_codes: list, date_from: str, date_to: str) -> list:
-    prices_list = []
+    prices_days = Prices.query.filter(Prices.day >= date_from).filter(Prices.day <= date_to)
     for origin in origin_codes:
-        prices_orig = Prices.query.filter_by(orig_code=origin)
+        prices_orig = prices_days.filter_by(orig_code=origin)
         for dest in dest_codes:
             prices_dest = prices_orig.filter_by(dest_code=dest)
-            prices_day = prices_dest.filter(Prices.day >= date_from).filter(Prices.day <= date_to).all()
-            prices_list.extend(prices_day)
+    prices_list = prices_dest.all()
     prices = [{'price': item.price, 'day': item.day} for item in prices_list]
     return prices
 

@@ -3,19 +3,19 @@ import datetime
 
 import pytest
 
-from functions.utils.prices import price_parser, get_averages
+from functions.utils.prices import price_parser, get_averages, price_converter
 
 os.environ['OPENEXCHANGERATES_URL'] = 'https://openexchangerates.org/api/historical/2013-02-16.json'
 
 
-# @pytest.mark.parametrize('price, expected', [
-#     ('1234', 1234.0),
-#     ('1234 PLN', 393.85),
-#     ('1234PLN', 393.85),
-#     ('1234 EUR', 1649.5)
-# ])
-# def test_price_converter(price, expected):
-#     assert price_converter(price) == expected
+@pytest.mark.parametrize('price, expected', [
+    ('1234', 1234.0),
+    ('1234 PLN', 393.85),
+    ('1234PLN', 393.85),
+    ('1234 EUR', 1649.5)
+])
+def test_price_converter(price, expected):
+    assert price_converter(price) == expected
 
 
 @pytest.mark.parametrize('price, expected', [

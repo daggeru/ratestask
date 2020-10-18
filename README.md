@@ -92,3 +92,5 @@ Factors we need to take into consideration:
 * Lambda's cooldowns.  
 * Idempotent operations on database.  
 * It might by exaggeration, but S3 file size limit, in case we will provide files bigger than 5 terabytes :)
+
+Time spent - around 16h
